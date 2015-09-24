@@ -1,0 +1,17 @@
+{
+  "name": "gimmage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Leonardo Lessa <lrlessa@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bufferjs": "^2.0.0",
+    "fs": "0.0.2",
+    "gm": "^1.20.0",
+    "hapi": "^10.0.1"
+  }
+}
