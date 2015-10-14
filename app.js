@@ -5,8 +5,8 @@ var handlers = require('./handlers');
 var server = new Hapi.Server();
 
 server.connection({ 
-    host: 'localhost', 
-    port: 8000 
+    host: process.env.DOMAIN || 'localhost', 
+    port: process.env.PORT || 8000 
 });
 
 // Add the route
@@ -18,5 +18,7 @@ server.route({
 
 // Start the server
 server.start(function () {
-    console.log('Server running at:', server.info.uri);
+	if (!process.env.DOMAIN) {
+    	console.log('Server running at:', server.info.uri);
+	}
 });
