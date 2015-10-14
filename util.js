@@ -1,18 +1,19 @@
+var Q = require('q');
 var fs = require('fs');
 var gm = require('gm');
+var readdir = Q.denodeify(fs.readdir);
+require('bufferjs');
 
 module.exports = {
-	random: function(type) {
-		var imagesPath = './images/' + type;
-		var fileList = fs.readdirSync(imagesPath);
-		var randomNumber = Math.floor(Math.random() * (fileList.length - 1 + 1)) + 0;
+	random: function() {
+		var imagesPath = './images/';
 
-		return imagesPath + '/' + fileList[randomNumber];	
+		return readdir(imagesPath).then(function (files) {
+			return imagesPath + files[Math.floor(Math.random() * files.length)];
+		});	
 	},
 
 	convert: function(data, cb) {
-		var path = this.random(data.type);
-
 		var streamImage = function(err, stdout, stderr) {
 			var base = [];
 
@@ -25,10 +26,12 @@ module.exports = {
 			});
 		};
 		
-		gm(path)
-			.resize(data.width, data.height, '^')
-			.gravity('Center')
-			.crop(data.width, data.height)
-			.stream(streamImage);
+		this.random().then(function (path) {
+			gm(path)
+				.resize(data.width, data.height, '^')
+				.gravity('Center')
+				.crop(data.width, data.height)
+				.stream(streamImage);
+		});	
 	}
 };
