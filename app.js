@@ -12,7 +12,7 @@ server.connection({
 // Add the route
 server.route({
     method: 'GET',
-    path:'/{width}/{height}', 
+    path:'/{width}/{height?}', 
     handler: handlers.index
 });
 
