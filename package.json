@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Leonardo Lessa <lrlessa@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bufferjs": "^2.0.0",
     "fs": "0.0.2",
