@@ -2,9 +2,13 @@ var util = require('./util');
 
 module.exports = {
 	index: function (req, reply) {
+		var width = req.params.width < 2000 ? parseInt(req.params.width) : 2000;
+		var height = req.params.height ? 
+			(req.params.height < 2000 ? parseInt(req.params.height) : 2000) : width;
+
 		util.convert({
-			width: req.params.width,
-			height: req.params.height || req.params.width
+			width: width,
+			height: height
 		}).then(function(img) {
 			reply(img)
 				.type('image/png')
